@@ -2,17 +2,17 @@ package prob5;
 
 import java.util.Arrays;
 
-public class MyStack {
+public class MyStack<T> {
 	private int top;
-	private String[] buffer;
+	private T[] buffer;
 
 	@SuppressWarnings("unchecked")
 	public MyStack(int capacity) {
 		top = -1;
-		buffer = new String[capacity];
+		buffer = (T[])new Object[capacity];
 	}
 
-	public void push(String s) {
+	public void push(T s) {
 		top++;
 		if(top == buffer.length) {
 			buffer = Arrays.copyOf(buffer, buffer.length+1);
@@ -23,12 +23,12 @@ public class MyStack {
 		}
 	}
 
-	public String pop() throws MyStackException {
+	public T pop() throws MyStackException {
 		
-		if(top == -1) {
+		if(isEmpty()) {
 			throw new MyStackException("stack is empty");
 		}
-		String result = buffer[top];
+		T result = buffer[top];
 		top--;
 		return result;
 		
